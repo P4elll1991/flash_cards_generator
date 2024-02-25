@@ -3,11 +3,14 @@ package openai
 import (
 	"context"
 	"log"
+	"os"
 
 	"github.com/ayush6624/go-chatgpt"
 )
 
-const api_key = "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"
+var (
+	api_key = os.Getenv("FLASH_CARDS_OPEN_AI_API_KEY")
+)
 
 var client *chatgpt.Client
 
