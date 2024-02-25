@@ -1,0 +1,16 @@
+[
+    {
+        "native_lang":"RU",
+	    "learning_lang":"EN",
+	    "words": 3,
+	    "topic": "Food & Cuisine",
+	    "level":"A1"
+    },
+    {
+        "native_lang":"RU",
+	    "learning_lang":"EN",
+	    "words": 5,
+	    "topic": "Travel & Sightseeing",
+	    "level":"B1"
+    }
+]
