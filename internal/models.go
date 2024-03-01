@@ -35,7 +35,7 @@ type GenerateParams struct {
 }
 
 func (param GenerateParams) Hash() string {
-	return fmt.Sprintf("%s-%s-%s-%s", param.NativeLang, param.LearningLang, param.Topic, param.Level)
+	return fmt.Sprintf("%s-%s-%s", param.NativeLang, param.LearningLang, param.Topic)
 }
 
 func (p GenerateParams) Divide(limit int64) []GenerateParams {

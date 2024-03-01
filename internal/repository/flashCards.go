@@ -97,7 +97,6 @@ func (repo *flashCardRepo) GetExceptions(params internal.GenerateParams) (map[st
 		"native_lang":   params.NativeLang,
 		"learning_lang": params.LearningLang,
 		"topic":         params.Topic,
-		"level":         params.Level,
 	}
 
 	cards, err := repo.Search(searchParams)

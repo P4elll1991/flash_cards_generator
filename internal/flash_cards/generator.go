@@ -5,25 +5,14 @@ import (
 	"errors"
 	"flash_cards/internal"
 	"fmt"
+	"os"
 	"strings"
 )
 
-const openAI_request_mask = `Generate a list in json format using the following template:
-[
-	{
-	 "topic"–  Asked Topic 
-	 "level" -  Asked CEFR Level
-	 "word"- the word on language, user wants to learn
-	 "pronunciation" -  pronunciation instruction
-	 "phonetic_respelling" - phonetic respelling using user's native language
-	 "definition" - detailed word definition using user's native language
-	 "translation" - translation of the word to user's native language,
-	 "example" - example of usage of the word in real sentence.
-	 "example_translation" -  translation of the usage example to user's native language
-   }
-]
-For the following terms Native language: %s. Learning: %s. %d words, Topic: %s, CEFR Level: %s .
-`
+var (
+	openAI_request              = os.Getenv("FLASH_CARDS_OPEN_AI_REQUEST")
+	openAI_request_postfix_mask = os.Getenv("FLASH_CARDS_OPEN_AI_REQUEST_POSTFIX_MASK")
+)
 
 const exceptions_title = `Exclude the following words from the list: `
 
@@ -32,6 +21,7 @@ type OpenAIClient func(req string) (string, error)
 var client OpenAIClient
 
 func Init(c OpenAIClient) {
+	fmt.Println(openAI_request + openAI_request_postfix_mask)
 	client = c
 }
 
@@ -40,7 +30,7 @@ func Generate(params internal.GenerateParams, exceptions map[string]internal.Fla
 		return nil, errors.New("flash cards generator do not init")
 	}
 
-	req := params.GenerateRequest(openAI_request_mask)
+	req := params.GenerateRequest(openAI_request + openAI_request_postfix_mask)
 
 	if len(exceptions) > 0 {
 		req += exceptions_title
