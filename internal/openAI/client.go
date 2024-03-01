@@ -9,7 +9,8 @@ import (
 )
 
 var (
-	api_key = os.Getenv("FLASH_CARDS_OPEN_AI_API_KEY")
+	api_key       = os.Getenv("FLASH_CARDS_OPEN_AI_API_KEY")
+	chatgpt_model = os.Getenv("FLASH_CARDS_OPEN_AI_CHATGPT_MODEL")
 )
 
 var client *chatgpt.Client
@@ -24,7 +25,7 @@ func init() {
 
 func Request(req string) (string, error) {
 	res, err := client.Send(context.Background(), &chatgpt.ChatCompletionRequest{
-		Model: chatgpt.GPT4,
+		Model: chatgpt.ChatGPTModel(chatgpt_model),
 		Messages: []chatgpt.ChatMessage{
 			{
 				Role:    chatgpt.ChatGPTModelRoleUser,
