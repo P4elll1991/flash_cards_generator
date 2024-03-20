@@ -137,7 +137,7 @@ func (exe *executor) generate(task internal.GenerateParams) {
 	fmt.Println("generate start", task.TaskId, task.Words)
 	exceptions, err := exe.service.GetExceptions(task)
 	if err != nil {
-		fmt.Println("generate eror ", task.TaskId, err.Error())
+		fmt.Println("GetExceptions error ", task.TaskId, err.Error())
 		go func() {
 			time.Sleep(10 * time.Second)
 			exe.queue <- task
@@ -147,7 +147,7 @@ func (exe *executor) generate(task internal.GenerateParams) {
 
 	cards, err := flashcards.Generate(task, exceptions)
 	if err != nil {
-		fmt.Println("generate eror ", task.TaskId, err.Error())
+		fmt.Println("generate error ", task.TaskId, err.Error())
 		go func() {
 			time.Sleep(10 * time.Second)
 			exe.queue <- task
@@ -159,7 +159,7 @@ func (exe *executor) generate(task internal.GenerateParams) {
 	if len(cards) > 0 {
 		err := exe.service.SaveCards(task.TaskId, cards)
 		if err != nil {
-			fmt.Println("generate eror ", task.TaskId, err.Error())
+			fmt.Println("SaveCards error ", task.TaskId, err.Error())
 			go func() {
 				time.Sleep(10 * time.Second)
 				exe.queue <- task

@@ -40,13 +40,16 @@ func Generate(params internal.GenerateParams, exceptions map[string]internal.Fla
 		}
 		req += strings.Join(words, ", ")
 	}
-	fmt.Println(req)
+	// fmt.Println(req)
 	resp, err := client(req)
 	if err != nil {
+		fmt.Println("error client: ", err.Error())
 		return nil, err
 	}
 	flashCards := []internal.FlashCard{}
 	if err := json.Unmarshal([]byte(resp), &flashCards); err != nil {
+		fmt.Println("error Unmarshal: ", err.Error())
+		fmt.Println(resp)
 		return nil, err
 	}
 	result := make(map[string]internal.FlashCard)
