@@ -47,6 +47,8 @@ func Generate(params internal.GenerateParams, exceptions map[string]internal.Fla
 		return nil, err
 	}
 	flashCards := []internal.FlashCard{}
+	resp = strings.ReplaceAll(resp, "```", "")
+	resp = strings.ReplaceAll(resp, "```json", "")
 	if err := json.Unmarshal([]byte(resp), &flashCards); err != nil {
 		fmt.Println("error Unmarshal: ", err.Error())
 		fmt.Println(resp)
