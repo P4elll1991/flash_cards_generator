@@ -29,7 +29,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_LOGIN }}/cards-dev
+          tags: ${{ secrets.DOCKER_HUB_LOGIN }}/flash_cards_generator
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
   clean:
