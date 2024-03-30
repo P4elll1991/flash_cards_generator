@@ -96,7 +96,7 @@ func (service *service) GetTask(id int64) (internal.Task, error) {
 			fmt.Println("SetStatus", err)
 		}
 	}
-	task.RouteResult = fmt.Sprintf("/cards?task_id=%d", id)
+	task.RouteResult = fmt.Sprintf("/generator/cards?task_id=%d", id)
 	fmt.Println(task.RouteResult)
 
 	return task, nil
